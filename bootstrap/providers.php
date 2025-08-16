@@ -2,5 +2,5 @@
 
 return [
     App\Providers\AppServiceProvider::class,
-    App\Providers\Filament\BooksPanelProvider::class,
+    App\Providers\Filament\LivrosPanelProvider::class,
 ];
