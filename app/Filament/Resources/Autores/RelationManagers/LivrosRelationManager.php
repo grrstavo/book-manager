@@ -24,11 +24,13 @@ class LivrosRelationManager extends RelationManager
 {
     protected static string $relationship = 'livros';
 
+    protected static ?string $inverseRelationship = 'autores';
+
     public function form(Schema $schema): Schema
     {
         return $schema
             ->components([
-                TextInput::make('Nome')
+                TextInput::make('Titulo')
                     ->required(),
             ]);
     }
@@ -37,7 +39,7 @@ class LivrosRelationManager extends RelationManager
     {
         return $schema
             ->components([
-                TextEntry::make('Nome'),
+                TextEntry::make('Titulo'),
             ]);
     }
 
@@ -46,27 +48,14 @@ class LivrosRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('Titulo')
             ->columns([
-                TextColumn::make('Nome')
+                TextColumn::make('Titulo')
                     ->searchable(),
             ])
-            ->filters([
-                //
-            ])
             ->headerActions([
-                CreateAction::make(),
-                AttachAction::make(),
+                AttachAction::make()->preloadRecordSelect(),
             ])
             ->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
                 DetachAction::make(),
-                DeleteAction::make(),
-            ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DissociateBulkAction::make(),
-                    DeleteBulkAction::make(),
-                ]),
             ]);
     }
 }
