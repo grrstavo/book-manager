@@ -18,14 +18,20 @@ class AutoresChart extends ChartWidget
                 [
                     'label' => 'Quantidade de Livros',
                     'data' => $rows->pluck('total_livros')->toArray(),
+                    'backgroundColor' => '#FF6384',
+                    'borderColor' => '#9b0606ff'
                 ],
                 [
                     'label' => 'Valor Total (R$)',
                     'data' => $rows->pluck('total_valor')->toArray(),
+                    'backgroundColor' => '#5878ecff',
+                    'borderColor' => '#0d2b96ff',
                 ],
                 [
                     'label' => 'Assuntos Distintos',
                     'data' => $rows->pluck('total_assuntos')->toArray(),
+                    'backgroundColor' => '#55dd40ff',
+                    'borderColor' => '#148603ff',
                 ],
             ],
             'labels' => $rows->pluck('autor_nome')->toArray(),
