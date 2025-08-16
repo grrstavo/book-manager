@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class AutoresChart extends ChartWidget
 {
-    protected ?string $heading = 'Widgets';
+    protected ?string $heading = 'Autores';
 
     protected function getData(): array
     {
