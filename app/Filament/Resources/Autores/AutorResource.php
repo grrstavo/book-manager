@@ -10,6 +10,7 @@ use App\Filament\Resources\Autores\RelationManagers\LivrosRelationManager;
 use App\Filament\Resources\Autores\Schemas\AutorForm;
 use App\Filament\Resources\Autores\Schemas\AutorInfolist;
 use App\Filament\Resources\Autores\Tables\AutoresTable;
+use App\Filament\Resources\Autores\Widgets\AutoresChart;
 use App\Models\Autor;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -48,6 +49,13 @@ class AutorResource extends Resource
     {
         return [
             LivrosRelationManager::class
+        ];
+    }
+
+    public static function getWidgets(): array
+    {
+        return [
+            AutoresChart::class,
         ];
     }
 

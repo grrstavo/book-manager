@@ -16,4 +16,9 @@ class ListAutores extends ListRecords
             CreateAction::make(),
         ];
     }
+
+    protected function getHeaderWidgets(): array
+    {
+        return AutorResource::getWidgets();
+    }
 }
