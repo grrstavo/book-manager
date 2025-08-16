@@ -31,6 +31,6 @@ return new class () extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('vw_relatorio_autor');
+        DB::statement('DROP VIEW vw_relatorio_autor');
     }
 };
