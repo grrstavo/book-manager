@@ -12,6 +12,7 @@ class AssuntoForm
         return $schema
             ->components([
                 TextInput::make('Descricao')
+                    ->maxLength(40)
                     ->required(),
             ]);
     }

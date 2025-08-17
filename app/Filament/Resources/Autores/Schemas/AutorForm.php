@@ -12,6 +12,7 @@ class AutorForm
         return $schema
             ->components([
                 TextInput::make('Nome')
+                    ->maxLength(40)
                     ->required(),
             ]);
     }
