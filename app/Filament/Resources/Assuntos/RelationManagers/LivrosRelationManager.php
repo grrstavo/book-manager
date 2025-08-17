@@ -67,32 +67,17 @@ class LivrosRelationManager extends RelationManager
                 TextColumn::make('Editora')
                     ->searchable(),
                 TextColumn::make('Edicao')
-                    ->numeric()
-                    ->sortable(),
+                    ->numeric(),
                 TextColumn::make('AnoPublicacao')
                     ->searchable(),
                 TextColumn::make('Valor')
                     ->numeric()
-                    ->sortable(),
-            ])
-            ->filters([
-                //
             ])
             ->headerActions([
-                CreateAction::make(),
                 AttachAction::make(),
             ])
             ->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
                 DetachAction::make(),
-                DeleteAction::make(),
-            ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DissociateBulkAction::make(),
-                    DeleteBulkAction::make(),
-                ]),
             ]);
     }
 }

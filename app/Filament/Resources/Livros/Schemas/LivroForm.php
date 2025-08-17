@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Livros\Schemas;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
+use Filament\Support\RawJs;
 
 class LivroForm
 {
@@ -13,8 +14,10 @@ class LivroForm
         return $schema
             ->components([
                 TextInput::make('Titulo')
+                    ->maxLength(40)
                     ->required(),
                 TextInput::make('Editora')
+                    ->maxLength(40)
                     ->required(),
                 TextInput::make('Edicao')
                     ->required()
@@ -23,8 +26,33 @@ class LivroForm
                     ->options(range(now()->year, 0))
                     ->required(),
                 TextInput::make('Valor')
-                    ->required()
-                    ->numeric(),
+                    ->prefix('R$')
+                    ->mask(RawJs::make(<<<'JS'
+                        (function($input) {
+                            // Strip all non-digit characters
+                            const digits = $input.replace(/\D/g, '');
+
+                            if (!digits) {
+                                return '';
+                            }
+
+                            // Always ensure at least two digits for cents
+                            const padded = digits.padStart(2, '0');
+                            const len = padded.length;
+
+                            const intPart = padded.slice(0, len - 2);
+                            const centPart = padded.slice(len - 2);
+
+                            // Remove leading zeros from integer part, but if empty, default to '0'
+                            const trimmedInt = intPart.replace(/^0+/, '') || '0';
+
+                            // Combine with dot as cents separator
+                            return trimmedInt + '.' + centPart;
+                        })($input);
+                    JS))
+                    ->placeholder('10.00')
+                    ->stripCharacters([',', '.', '-'])
+                    ->required(),
             ]);
     }
 }

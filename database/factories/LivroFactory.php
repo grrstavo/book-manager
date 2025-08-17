@@ -21,7 +21,7 @@ class LivroFactory extends Factory
             'Editora' => fake()->company(),
             'Edicao' => fake()->numberBetween(1, 10),
             'AnoPublicacao' => fake()->year(max: 'now'),
-            'Valor' => fake()->randomNumber(3)
+            'Valor' => fake()->randomNumber(5)
         ];
     }
 }

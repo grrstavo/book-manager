@@ -14,11 +14,11 @@ class LivroInfolist
                 TextEntry::make('Titulo'),
                 TextEntry::make('Editora'),
                 TextEntry::make('Edicao')
-                    ->numeric(),
+                    ->numeric(thousandsSeparator: false),
                 TextEntry::make('AnoPublicacao')
-                    ->numeric(),
+                    ->numeric(thousandsSeparator: false),
                 TextEntry::make('Valor')
-                    ->numeric(),
+                    ->money('BRL', divideBy: 100),
             ]);
     }
 }

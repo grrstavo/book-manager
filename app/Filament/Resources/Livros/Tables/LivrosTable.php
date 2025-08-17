@@ -25,6 +25,7 @@ class LivrosTable
                 TextColumn::make('AnoPublicacao')
                     ->searchable(),
                 TextColumn::make('Valor')
+                    ->money('BRL', divideBy: 100)
                     ->searchable(),
             ])
             ->filters([
