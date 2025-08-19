@@ -74,7 +74,7 @@ class LivrosRelationManager extends RelationManager
                     ->numeric()
             ])
             ->headerActions([
-                AttachAction::make(),
+                AttachAction::make()->preloadRecordSelect()->attachAnother(condition: false),
             ])
             ->recordActions([
                 DetachAction::make(),

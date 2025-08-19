@@ -18,13 +18,11 @@ class AssuntosTable
                 TextColumn::make('Descricao')
                     ->searchable(),
             ])
-            ->filters([
-                //
-            ])
             ->recordActions([
                 ViewAction::make(),
                 EditAction::make(),
             ])
+            ->defaultSort('codAs', 'desc')
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
