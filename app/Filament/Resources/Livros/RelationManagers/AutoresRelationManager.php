@@ -48,24 +48,11 @@ class AutoresRelationManager extends RelationManager
                 TextColumn::make('Nome')
                     ->searchable(),
             ])
-            ->filters([
-                //
-            ])
             ->headerActions([
-                CreateAction::make(),
-                AttachAction::make()
+                AttachAction::make()->preloadRecordSelect()->attachAnother(condition: false)
             ])
             ->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
                 DetachAction::make(),
-                DeleteAction::make(),
-            ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DetachBulkAction::make(),
-                    DeleteBulkAction::make(),
-                ]),
             ]);
     }
 }

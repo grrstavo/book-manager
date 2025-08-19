@@ -52,6 +52,7 @@ class LivroForm
                     JS))
                     ->placeholder('10.00')
                     ->stripCharacters([',', '.', '-'])
+                    ->numeric()
                     ->required(),
             ]);
     }

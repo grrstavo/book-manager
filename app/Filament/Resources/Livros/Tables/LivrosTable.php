@@ -28,17 +28,10 @@ class LivrosTable
                     ->money('BRL', divideBy: 100)
                     ->searchable(),
             ])
-            ->filters([
-                //
-            ])
+            ->defaultSort('Codl', 'desc')
             ->recordActions([
                 ViewAction::make(),
                 EditAction::make(),
-            ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
             ]);
     }
 }

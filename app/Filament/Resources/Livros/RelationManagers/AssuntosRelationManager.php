@@ -48,24 +48,11 @@ class AssuntosRelationManager extends RelationManager
                 TextColumn::make('Descricao')
                     ->searchable(),
             ])
-            ->filters([
-                //
-            ])
             ->headerActions([
-                CreateAction::make(),
-                AttachAction::make(),
+                AttachAction::make()->preloadRecordSelect()->attachAnother(condition: false),
             ])
             ->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
                 DetachAction::make(),
-                DeleteAction::make(),
-            ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DetachBulkAction::make(),
-                    DeleteBulkAction::make(),
-                ]),
             ]);
     }
 }
