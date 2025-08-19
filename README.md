@@ -88,47 +88,112 @@ php artisan migrate --seed
 ./vendor/bin/pest
 ```
 
-## 🗄️ Comandos de Banco de Dados
+## 🗄️ Esquema do Banco de Dados
 
-### Migrações
-```bash
-# Executar todas as migrações
-php artisan migrate
+### Tabelas Principais
 
-# Executar migrações com dados de exemplo
-php artisan migrate --seed
-
-# Reverter última migração
-php artisan migrate:rollback
-
-# Reverter todas as migrações
-php artisan migrate:reset
-
-# Recriar banco do zero
-php artisan migrate:fresh --seed
+#### **Autor**
+```sql
+CREATE TABLE Autor (
+    CodAu BIGINT PRIMARY KEY AUTO_INCREMENT,
+    Nome VARCHAR(40) NOT NULL
+);
 ```
 
-### Seeders
-```bash
-# Executar todos os seeders
-php artisan db:seed
-
-# Executar seeder específico
-php artisan db:seed --class=AutorSeeder
-php artisan db:seed --class=AssuntoSeeder
-php artisan db:seed --class=LivroSeeder
+#### **Livro**
+```sql
+CREATE TABLE Livro (
+    Codl BIGINT PRIMARY KEY AUTO_INCREMENT,
+    Titulo VARCHAR(40) NOT NULL,
+    Editora VARCHAR(40) NOT NULL,
+    Edicao INTEGER NOT NULL,
+    AnoPublicacao VARCHAR(4) NOT NULL,
+    Valor INTEGER NOT NULL  -- Valor em centavos
+);
 ```
 
-### Factories
-```bash
-# Gerar dados de teste via Tinker
-php artisan tinker
-
-# Dentro do Tinker:
-App\Models\Autor::factory(10)->create();
-App\Models\Assunto::factory(5)->create();
-App\Models\Livro::factory(20)->create();
+#### **Assunto**
+```sql
+CREATE TABLE Assunto (
+    codAs BIGINT PRIMARY KEY AUTO_INCREMENT,
+    Descricao VARCHAR(20) NOT NULL
+);
 ```
+
+### Tabelas de Relacionamento
+
+#### **Livro_Autor** (Many-to-Many)
+```sql
+CREATE TABLE Livro_Autor (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    Livro_Codl BIGINT NOT NULL,
+    Autor_CodAu BIGINT NOT NULL,
+    FOREIGN KEY (Livro_Codl) REFERENCES Livro(Codl) ON DELETE CASCADE,
+    FOREIGN KEY (Autor_CodAu) REFERENCES Autor(CodAu) ON DELETE CASCADE
+);
+```
+
+#### **Livro_Assunto** (Many-to-Many)
+```sql
+CREATE TABLE Livro_Assunto (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    Livro_Codl BIGINT NOT NULL,
+    Assunto_codAs BIGINT NOT NULL,
+    FOREIGN KEY (Livro_Codl) REFERENCES Livro(Codl) ON DELETE CASCADE,
+    FOREIGN KEY (Assunto_codAs) REFERENCES Assunto(codAs) ON DELETE CASCADE
+);
+```
+
+### View de Relatórios
+
+#### **vw_relatorio_autor**
+```sql
+CREATE OR REPLACE VIEW vw_relatorio_autor AS
+SELECT 
+    a.CodAu AS autor_id,
+    a.Nome AS autor_nome,
+    COUNT(DISTINCT l.Codl) AS total_livros,
+    SUM(l.Valor) AS total_valor,
+    COUNT(DISTINCT las.Assunto_codAs) AS total_assuntos,
+    AVG(l.Valor) AS media_valor
+FROM Autor a
+JOIN Livro_Autor la ON a.CodAu = la.Autor_CodAu
+JOIN Livro l ON la.Livro_Codl = l.Codl
+LEFT JOIN Livro_Assunto las ON l.Codl = las.Livro_Codl
+GROUP BY a.CodAu, a.Nome;
+```
+
+### Relacionamentos
+
+```
+┌─────────────┐       ┌─────────────────┐       ┌─────────────┐
+│    Autor    │       │   Livro_Autor   │       │    Livro    │
+├─────────────┤       ├─────────────────┤       ├─────────────┤
+│ CodAu (PK)  │◄─────►│ Autor_CodAu(FK) │       │ Codl (PK)   │
+│ Nome        │       │ Livro_Codl (FK) │◄─────►│ Titulo      │
+└─────────────┘       └─────────────────┘       │ Editora     │
+                                                │ Edicao      │
+                                                │ AnoPublicacao│
+                                                │ Valor       │
+                                                └─────────────┘
+                                                       ▲
+                                                       │
+                                                       ▼
+┌─────────────┐       ┌─────────────────┐       ┌─────────────┐
+│   Assunto   │       │ Livro_Assunto   │       │             │
+├─────────────┤       ├─────────────────┤       │             │
+│ codAs (PK)  │◄─────►│Assunto_codAs(FK)│       │             │
+│ Descricao   │       │ Livro_Codl (FK) │◄──────┘             │
+└─────────────┘       └─────────────────┘                     │
+```
+
+### Características do Schema
+
+- **Relacionamentos Many-to-Many**: Um livro pode ter múltiplos autores e um autor pode ter múltiplos livros
+- **Relacionamentos Many-to-Many**: Um livro pode ter múltiplos assuntos e um assunto pode estar em múltiplos livros
+- **Integridade Referencial**: Cascade delete para manter consistência
+- **View Otimizada**: `vw_relatorio_autor` para estatísticas agregadas dos widgets
+- **Valores Monetários**: Armazenados em centavos (INTEGER) para precisão
 
 ## 🐳 Docker
 
@@ -226,19 +291,6 @@ database/
 - **Widgets Dinâmicos**: Gráficos Chart.js integrados com Filament
 - **Cache de Dados**: Repository com cache para melhor performance
 - **Validações Customizadas**: Regras de negócio específicas
-
-## 🧪 Testes
-
-```bash
-# Executar todos os testes
-php artisan test
-
-# Executar testes com coverage
-php artisan test --coverage
-
-# Executar testes específicos
-php artisan test --filter=AutorTest
-```
 
 ## 📝 Licença
 
