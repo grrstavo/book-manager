@@ -179,12 +179,12 @@ GROUP BY a.CodAu, a.Nome;
                                                        ▲
                                                        │
                                                        ▼
-┌─────────────┐       ┌─────────────────┐       ┌─────────────┐
-│   Assunto   │       │ Livro_Assunto   │       │             │
-├─────────────┤       ├─────────────────┤       │             │
-│ codAs (PK)  │◄─────►│Assunto_codAs(FK)│       │             │
-│ Descricao   │       │ Livro_Codl (FK) │◄──────┘             │
-└─────────────┘       └─────────────────┘                     │
+                      ┌─────────────┐       ┌─────────────────┐
+                      │   Assunto   │       │ Livro_Assunto   │
+                      ├─────────────┤       ├─────────────────┤
+                      │ codAs (PK)  │◄─────►│Assunto_codAs(FK)│
+                      │ Descricao   │       │ Livro_Codl (FK) │
+                      └─────────────┘       └─────────────────┘
 ```
 
 ### Características do Schema
