@@ -25,6 +25,7 @@ class AutoresTable
                 ViewAction::make(),
                 EditAction::make(),
             ])
+            ->defaultSort('CodAu', 'desc')
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),

@@ -52,7 +52,7 @@ class LivrosRelationManager extends RelationManager
                     ->searchable(),
             ])
             ->headerActions([
-                AttachAction::make()->preloadRecordSelect(),
+                AttachAction::make()->preloadRecordSelect()->attachAnother(condition: false),
             ])
             ->recordActions([
                 DetachAction::make(),
