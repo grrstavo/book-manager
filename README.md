@@ -1,61 +1,247 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 📚 Book Manager
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Um sistema completo de gerenciamento de livros, autores e assuntos desenvolvido com Laravel e Filament. O sistema oferece uma interface administrativa moderna e intuitiva para catalogar e gerenciar uma biblioteca de livros.
 
-## About Laravel
+## ✨ Principais Funcionalidades
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### 📖 Gestão de Livros
+- **CRUD Completo**: Criar, visualizar, editar e excluir livros
+- **Informações Detalhadas**: Título, edição, ano de publicação, valor
+- **Relacionamentos**: Associação com múltiplos autores e assuntos
+- **Validações**: Campos obrigatórios e regras de negócio
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### ✍️ Gestão de Autores
+- **Perfil Completo**: Nome e informações dos autores
+- **Estatísticas Avançadas**: Dashboards com métricas por autor
+- **Relacionamentos**: Visualização de todos os livros do autor
+- **Widgets Interativos**: Gráficos de barras com dados em tempo real
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 🏷️ Gestão de Assuntos
+- **Categorização**: Organização por temas e assuntos
+- **Relacionamentos**: Livros associados a cada assunto
+- **Busca e Filtros**: Localização rápida de conteúdo
 
-## Learning Laravel
+### 📊 Dashboard e Relatórios
+- **Widgets de Estatísticas**: Gráficos interativos por autor
+  - Livros por Autor
+  - Valor Total por Autor
+  - Assuntos por Autor
+  - Média de Valor por Autor
+- **Visualizações**: Interface moderna com Filament
+- **Dados em Tempo Real**: Estatísticas atualizadas automaticamente
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 🛠️ Tecnologias Utilizadas
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Backend
+- **[Laravel 12.x](https://laravel.com)** - Framework PHP moderno
+- **[Filament 4.x](https://filamentphp.com)** - Painel administrativo
+- **PHP 8.2+** - Linguagem de programação
+- **MySQL 8.0** - Banco de dados relacional
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Frontend
+- **[Livewire](https://livewire.laravel.com)** - Componentes dinâmicos
+- **[Alpine.js](https://alpinejs.dev)** - Framework JavaScript leve
+- **[Tailwind CSS](https://tailwindcss.com)** - Framework CSS utilitário
+- **[Chart.js](https://www.chartjs.org)** - Gráficos interativos
 
-## Laravel Sponsors
+### Desenvolvimento
+- **[Vite](https://vitejs.dev)** - Build tool e bundler
+- **[Pest](https://pestphp.com)** - Framework de testes
+- **[Laravel Pint](https://laravel.com/docs/pint)** - Code style fixer
+- **[Laravel Debugbar](https://github.com/barryvdh/laravel-debugbar)** - Debug toolbar
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### DevOps
+- **Docker & Docker Compose** - Containerização
+- **Nginx** - Servidor web
+- **Node.js 20** - Runtime JavaScript
 
-### Premium Partners
+## 🚀 Instalação
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### Pré-requisitos
+- Docker e Docker Compose
 
-## Contributing
+### Instalação com Docker
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+1. **Clone o repositório**
+```bash
+git clone <repository-url>
+cd book-manager
+```
 
-## Code of Conduct
+2. **Construir e iniciar todos os serviços**
+```bash
+docker-compose up --build
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+3. **Acessar bash do container**
+```bash
+docker-compose exec app bash
+```
 
-## Security Vulnerabilities
+4. **Executar migrações e seeders**
+```bash
+php artisan migrate --seed
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+5. **Executar testes**
+```bash
+./vendor/bin/pest
+```
 
-## License
+## 🗄️ Comandos de Banco de Dados
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Migrações
+```bash
+# Executar todas as migrações
+php artisan migrate
+
+# Executar migrações com dados de exemplo
+php artisan migrate --seed
+
+# Reverter última migração
+php artisan migrate:rollback
+
+# Reverter todas as migrações
+php artisan migrate:reset
+
+# Recriar banco do zero
+php artisan migrate:fresh --seed
+```
+
+### Seeders
+```bash
+# Executar todos os seeders
+php artisan db:seed
+
+# Executar seeder específico
+php artisan db:seed --class=AutorSeeder
+php artisan db:seed --class=AssuntoSeeder
+php artisan db:seed --class=LivroSeeder
+```
+
+### Factories
+```bash
+# Gerar dados de teste via Tinker
+php artisan tinker
+
+# Dentro do Tinker:
+App\Models\Autor::factory(10)->create();
+App\Models\Assunto::factory(5)->create();
+App\Models\Livro::factory(20)->create();
+```
+
+## 🐳 Docker
+
+### Configuração Docker
+
+O projeto inclui configuração completa com Docker Compose:
+
+- **app**: Aplicação Laravel (PHP 8.2 + Apache)
+- **nginx**: Servidor web (porta 8000)
+- **db**: MySQL 8.0 (porta 3306)
+- **node**: Node.js 20 para assets (porta 5173)
+
+### Comandos Docker
+
+```bash
+# Construir e iniciar todos os serviços
+docker-compose up --build
+
+# Acessar bash do container
+docker-compose exec app bash
+
+# Executar migrações e seeders
+php artisan migrate --seed
+
+# Executar testes
+./vendor/bin/pest
+```
+
+### Acesso
+- **Aplicação**: http://localhost:8000
+- **MySQL**: localhost:3306
+- **Vite Dev Server**: http://localhost:5173
+
+## 📁 Estrutura de Classes Importantes
+
+```
+app/
+├── Filament/
+│   └── Resources/
+│       └── Autores/
+│           ├── AutorResource.php           # Resource principal dos autores
+│           ├── Pages/
+│           │   ├── CreateAutor.php         # Página de criação
+│           │   ├── EditAutor.php           # Página de edição
+│           │   ├── ListAutores.php         # Página de listagem
+│           │   └── ViewAutor.php           # Página de visualização
+│           ├── RelationManagers/
+│           │   └── LivrosRelationManager.php # Gerenciador de livros do autor
+│           ├── Schemas/
+│           │   ├── AutorForm.php           # Schema do formulário
+│           │   └── AutorInfolist.php       # Schema de informações
+│           ├── Tables/
+│           │   └── AutoresTable.php        # Configuração da tabela
+│           └── Widgets/
+│               ├── TotalBooksWidget.php    # Widget: Livros por autor
+│               ├── TotalValueWidget.php    # Widget: Valor por autor
+│               ├── TotalSubjectsWidget.php # Widget: Assuntos por autor
+│               └── AverageValueWidget.php  # Widget: Média de valor
+├── Models/
+│   ├── Assunto.php                        # Model de Assunto
+│   ├── Autor.php                          # Model de Autor
+│   ├── Livro.php                          # Model de Livro
+│   └── User.php                           # Model de Usuário
+├── Repositories/
+│   └── AutorRepository.php                # Repository para dados de autores
+└── Services/
+    └── AutorService.php                   # Service para lógica de negócio
+
+database/
+├── factories/
+│   ├── AssuntoFactory.php                 # Factory para Assuntos
+│   ├── AutorFactory.php                   # Factory para Autores
+│   └── LivroFactory.php                   # Factory para Livros
+└── seeders/
+    ├── AssuntoSeeder.php                  # Seeder para Assuntos
+    ├── AutorSeeder.php                    # Seeder para Autores
+    ├── DatabaseSeeder.php                 # Seeder principal
+    └── LivroSeeder.php                    # Seeder para Livros
+```
+
+## 🎯 Arquitetura
+
+### Padrões Utilizados
+- **Repository Pattern**: Abstração da camada de dados
+- **Service Layer**: Lógica de negócio centralizada
+- **Factory Pattern**: Geração de dados de teste
+- **Resource Pattern**: Organização de recursos Filament
+
+### Relacionamentos
+- **Autor ↔ Livro**: Many-to-Many (um autor pode ter vários livros, um livro pode ter vários autores)
+- **Livro ↔ Assunto**: Many-to-Many (um livro pode ter vários assuntos, um assunto pode estar em vários livros)
+
+### Funcionalidades Especiais
+- **View Materializada**: `vw_relatorio_autor` para estatísticas otimizadas
+- **Widgets Dinâmicos**: Gráficos Chart.js integrados com Filament
+- **Cache de Dados**: Repository com cache para melhor performance
+- **Validações Customizadas**: Regras de negócio específicas
+
+## 🧪 Testes
+
+```bash
+# Executar todos os testes
+php artisan test
+
+# Executar testes com coverage
+php artisan test --coverage
+
+# Executar testes específicos
+php artisan test --filter=AutorTest
+```
+
+## 📝 Licença
+
+Este projeto está licenciado sob a [MIT License](https://opensource.org/licenses/MIT).
+
+---
