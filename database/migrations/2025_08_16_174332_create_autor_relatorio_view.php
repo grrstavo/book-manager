@@ -17,7 +17,8 @@ return new class () extends Migration {
                 a.Nome AS autor_nome,
                 COUNT(DISTINCT l.Codl) AS total_livros,
                 SUM(l.Valor) AS total_valor,
-                COUNT(DISTINCT las.Assunto_codAs) AS total_assuntos
+                COUNT(DISTINCT las.Assunto_codAs) AS total_assuntos,
+                AVG(l.Valor) AS media_valor
             FROM Autor a
             JOIN Livro_Autor la ON a.CodAu = la.Autor_CodAu
             JOIN Livro l ON la.Livro_Codl = l.Codl

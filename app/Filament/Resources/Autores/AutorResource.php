@@ -10,7 +10,10 @@ use App\Filament\Resources\Autores\RelationManagers\LivrosRelationManager;
 use App\Filament\Resources\Autores\Schemas\AutorForm;
 use App\Filament\Resources\Autores\Schemas\AutorInfolist;
 use App\Filament\Resources\Autores\Tables\AutoresTable;
-use App\Filament\Resources\Autores\Widgets\AutoresChart;
+use App\Filament\Resources\Autores\Widgets\TotalBooksWidget;
+use App\Filament\Resources\Autores\Widgets\TotalValueWidget;
+use App\Filament\Resources\Autores\Widgets\TotalSubjectsWidget;
+use App\Filament\Resources\Autores\Widgets\AverageValueWidget;
 use App\Models\Autor;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -117,7 +120,10 @@ class AutorResource extends Resource
     public static function getWidgets(): array
     {
         return [
-            AutoresChart::class,
+            TotalBooksWidget::class,
+            TotalValueWidget::class,
+            TotalSubjectsWidget::class,
+            AverageValueWidget::class,
         ];
     }
 
