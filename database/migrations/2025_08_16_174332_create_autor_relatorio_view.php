@@ -11,7 +11,7 @@ return new class () extends Migration {
     public function up(): void
     {
         DB::statement(
-            'CREATE VIEW vw_relatorio_autor AS
+            'CREATE OR REPLACE VIEW vw_relatorio_autor AS
             SELECT 
                 a.CodAu AS autor_id,
                 a.Nome AS autor_nome,
