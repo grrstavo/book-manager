@@ -7,8 +7,22 @@ use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 use Filament\Support\RawJs;
 
+/**
+ * Class LivroForm
+ *
+ * Form schema configuration for Livro (Book) resources.
+ * This class defines the form fields and validation rules for creating and editing books.
+ *
+ * @package App\Filament\Resources\Livros\Schemas
+ */
 class LivroForm
 {
+    /**
+     * Configure the form schema for Livro resources.
+     *
+     * @param Schema $schema The schema instance to configure
+     * @return Schema The configured schema with form components
+     */
     public static function configure(Schema $schema): Schema
     {
         return $schema

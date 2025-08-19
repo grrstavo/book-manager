@@ -5,10 +5,28 @@ namespace App\Filament\Resources\Autores\Widgets;
 use Filament\Widgets\ChartWidget;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * Class AutoresChart
+ *
+ * Chart widget for displaying author statistics.
+ * This widget shows data about books, total value, and subjects per author.
+ *
+ * @package App\Filament\Resources\Autores\Widgets
+ */
 class AutoresChart extends ChartWidget
 {
+    /**
+     * The heading for the chart widget.
+     *
+     * @var string|null
+     */
     protected ?string $heading = 'Autores';
 
+    /**
+     * Get the data for the chart.
+     *
+     * @return array<string, mixed> Chart data including datasets and labels
+     */
     protected function getData(): array
     {
         $rows = DB::table('vw_relatorio_autor')->get();
@@ -38,6 +56,11 @@ class AutoresChart extends ChartWidget
         ];
     }
 
+    /**
+     * Get the chart type.
+     *
+     * @return string The chart type
+     */
     protected function getType(): string
     {
         return 'bar';

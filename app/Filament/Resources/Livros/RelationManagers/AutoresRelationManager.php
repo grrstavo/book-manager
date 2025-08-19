@@ -19,10 +19,29 @@ use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
+/**
+ * Class AutoresRelationManager
+ *
+ * Relation manager for handling the many-to-many relationship between
+ * Livro (Book) and Autor (Author) entities.
+ *
+ * @package App\Filament\Resources\Livros\RelationManagers
+ */
 class AutoresRelationManager extends RelationManager
 {
+    /**
+     * The relationship name to manage.
+     *
+     * @var string
+     */
     protected static string $relationship = 'Autores';
 
+    /**
+     * Configure the form schema for this relation manager.
+     *
+     * @param Schema $schema The schema instance to configure
+     * @return Schema The configured schema with form components
+     */
     public function form(Schema $schema): Schema
     {
         return $schema
@@ -32,6 +51,12 @@ class AutoresRelationManager extends RelationManager
             ]);
     }
 
+    /**
+     * Configure the infolist schema for this relation manager.
+     *
+     * @param Schema $schema The schema instance to configure
+     * @return Schema The configured schema with infolist components
+     */
     public function infolist(Schema $schema): Schema
     {
         return $schema
@@ -40,6 +65,12 @@ class AutoresRelationManager extends RelationManager
             ]);
     }
 
+    /**
+     * Configure the table for this relation manager.
+     *
+     * @param Table $table The table instance to configure
+     * @return Table The configured table with columns and actions
+     */
     public function table(Table $table): Table
     {
         return $table
