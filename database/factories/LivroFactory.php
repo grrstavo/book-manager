@@ -19,7 +19,7 @@ class LivroFactory extends Factory
         return [
             'Titulo' => fake()->unique()->text(maxNbChars: 40),
             'Editora' => fake()->company(),
-            'Edicao' => fake()->numberBetween(1, 10),
+            'Edicao' => fake()->randomDigitNotZero(),
             'AnoPublicacao' => fake()->year(max: 'now'),
             'Valor' => fake()->randomNumber(5)
         ];

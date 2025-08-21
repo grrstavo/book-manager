@@ -33,58 +33,6 @@ class AutorService
     }
 
     /**
-     * Get formatted chart data for author statistics.
-     *
-     * This method prepares the data structure required for chart widgets,
-     * including datasets for books, values, and subjects with appropriate styling.
-     *
-     * @return array<string, mixed> Formatted chart data with datasets and labels
-     */
-    public function getChartData(): array
-    {
-        return [
-            'datasets' => [
-                [
-                    'label' => 'Quantidade de Livros',
-                    'data' => $this->autorRepository->getTotalBooksPerAuthor(),
-                    'backgroundColor' => '#FF6384',
-                    'borderColor' => '#9b0606ff'
-                ],
-                [
-                    'label' => 'Valor Total (R$)',
-                    'data' => $this->autorRepository->getTotalValuePerAuthor(),
-                    'backgroundColor' => '#5878ecff',
-                    'borderColor' => '#0d2b96ff',
-                ],
-                [
-                    'label' => 'Assuntos Distintos',
-                    'data' => $this->autorRepository->getTotalSubjectsPerAuthor(),
-                    'backgroundColor' => '#55dd40ff',
-                    'borderColor' => '#148603ff',
-                ],
-            ],
-            'labels' => $this->autorRepository->getAuthorNames(),
-        ];
-    }
-
-    /**
-     * Get author statistics summary.
-     *
-     * @return array<string, mixed> Summary statistics about authors
-     */
-    public function getStatisticsSummary(): array
-    {
-        $statistics = $this->autorRepository->getAuthorStatistics();
-
-        return [
-            'total_authors' => $statistics->count(),
-            'total_books' => $statistics->sum('total_livros'),
-            'total_value' => $statistics->sum('total_valor'),
-            'total_subjects' => $statistics->sum('total_assuntos'),
-        ];
-    }
-
-    /**
      * Get the total books count across all authors.
      *
      * @return int Total books count

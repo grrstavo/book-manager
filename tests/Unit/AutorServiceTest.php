@@ -4,53 +4,6 @@ use App\Repositories\AutorRepository;
 use App\Services\AutorService;
 use Mockery;
 
-it('can get chart data', function () {
-    $mockRepository = Mockery::mock(AutorRepository::class);
-    $service = new AutorService($mockRepository);
-    
-    $mockRepository->shouldReceive('getTotalBooksPerAuthor')->once()->andReturn([3, 2]);
-    $mockRepository->shouldReceive('getTotalValuePerAuthor')->once()->andReturn([1500, 800]);
-    $mockRepository->shouldReceive('getTotalSubjectsPerAuthor')->once()->andReturn([2, 1]);
-    $mockRepository->shouldReceive('getAuthorNames')->once()->andReturn(['João', 'Maria']);
-    
-    $result = $service->getChartData();
-    
-    expect($result)->toBeArray();
-    expect($result)->toHaveKeys(['datasets', 'labels']);
-    expect($result['datasets'])->toHaveCount(3);
-});
-
-it('returns correct summary data from getStatisticsSummary', function () {
-    $mockRepository = Mockery::mock(AutorRepository::class);
-    $service = new AutorService($mockRepository);
-
-    $mockStatistics = collect([
-        (object) [
-            'total_livros' => 3,
-            'total_valor' => 15000,
-            'total_assuntos' => 2,
-        ],
-        (object) [
-            'total_livros' => 2,
-            'total_valor' => 8000,
-            'total_assuntos' => 1,
-        ],
-    ]);
-
-    $mockRepository
-        ->shouldReceive('getAuthorStatistics')
-        ->once()
-        ->andReturn($mockStatistics);
-
-    $result = $service->getStatisticsSummary();
-
-    expect($result)->toBeArray();
-    expect($result['total_authors'])->toBe(2);
-    expect($result['total_books'])->toBe(5);
-    expect($result['total_value'])->toBe(23000);
-    expect($result['total_subjects'])->toBe(3);
-});
-
 it('delegates to repository in getTotalBooksCount', function () {
     $mockRepository = Mockery::mock(AutorRepository::class);
     $service = new AutorService($mockRepository);
